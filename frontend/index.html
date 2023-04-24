@@ -1,13 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite + TS</title>
+</head>
+
+<body>
+  <div id="app">
+    <main>
+      <form id="input">
+        <label for="nome">
+          <input type="text" id="nome" name="nome" placeholder="Nome" />
+        </label>
+        <label for="email">
+          <input type="email" id="email" name="email" placeholder="Email" />
+        </label>
+        <label for="telefone">
+          <input type="tel" id="telefone" name="telefone" placeholder="Telefone" />
+        </label>
+        <label for="profissao">
+          <input type="text" id="profissao" name="profissao" placeholder="Profissão" />
+        </label>
+
+        <button type="submit">Enviar</button>
+      </form>
+
+      <div id="output">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Telefone</th>
+              <th>Profissão</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+          <tbody id="data-body"></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
 </html>

@@ -1,24 +1,52 @@
 import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+const form = document.querySelector('#input') as HTMLFormElement;
+const tableBody = document.querySelector('#data-body') as HTMLTableSectionElement;
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+interface FormElements extends HTMLFormControlsCollection {
+    nome: HTMLInputElement;
+    email: HTMLInputElement;
+    telefone: HTMLInputElement;
+    profissao: HTMLInputElement;
+}
+
+form.addEventListener('submit', (e: SubmitEvent) => {
+  e.preventDefault();
+  const form = e.target as HTMLFormElement & { elements: FormElements };
+  const nome = form.elements['nome'].value;
+  const email = form.elements['email'].value;
+  const telefone = form.elements['telefone'].value;
+  const profissao = form.elements['profissao'].value;
+
+  const data = {
+      nome,
+      email,
+      telefone,
+      profissao
+  }
+
+  const tableRow = document.createElement('tr');
+  const tableDataId = document.createElement('td');
+  const tableDataNome = document.createElement('td');
+  const tableDataEmail = document.createElement('td');
+  const tableDataTelefone = document.createElement('td');
+  const tableDataProfissao = document.createElement('td');
+  const tableDataAcoes = document.createElement('td');
+
+
+  tableDataId.textContent = '1';
+  tableDataNome.textContent = data.nome;
+  tableDataEmail.textContent = data.email;
+  tableDataTelefone.textContent = data.telefone;
+  tableDataProfissao.textContent = data.profissao;
+  tableDataAcoes.innerHTML = "Excluir";
+
+  tableRow.appendChild(tableDataId);
+  tableRow.appendChild(tableDataNome);
+  tableRow.appendChild(tableDataEmail);
+  tableRow.appendChild(tableDataTelefone);
+  tableRow.appendChild(tableDataProfissao);
+  tableRow.appendChild(tableDataAcoes);
+
+  tableBody.appendChild(tableRow);
+})
