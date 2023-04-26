@@ -37,9 +37,13 @@ button:active {
     filter: brightness(0.6);
 }
 
+.button-excluir {
+    background-color: #f44336;
+    color: white;
+}
+
 table {
     border-collapse: separate;
-    width: 100%;
 }
 
 thead {
@@ -56,7 +60,17 @@ tbody tr:nth-child(odd) {
     background-color: #f1f1f1;
 }
 
+
+tbody td:first-child {
+    padding: .3rem .6rem;
+}
+
 tbody td {
-    padding: .3rem;
+    padding: .3rem 3rem;
     font-weight: 400;
+}
+
+tbody td:last-child {
+
+    width: fit-content;
 }
