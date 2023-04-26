@@ -3,7 +3,7 @@ package com.scc4.purejs.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,32 +13,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.scc4.purejs.mapper.ClienteRowMapper;
+import com.scc4.purejs.error.MissingProperty;
+import com.scc4.purejs.error.NotCreateId;
+import com.scc4.purejs.error.NotFound;
 import com.scc4.purejs.model.Cliente;
+import com.scc4.purejs.response.MessageResponse;
+import com.scc4.purejs.service.ClienteService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/cliente")
 public class ClienteController {
     @Autowired
-    private JdbcTemplate jdbcTemplate;
-
-    @Autowired
-    private ClienteRowMapper clienteRowMapper;
+    private ClienteService clienteService;
 
     @GetMapping
-    public List<Cliente> listAll() {
-        return jdbcTemplate.query("select * from cliente", clienteRowMapper);
+    public ResponseEntity<List<Cliente>> listAll() {
+        return ResponseEntity.ok(clienteService.listAll());
     }
 
     @PostMapping
-    public void save(@RequestBody Cliente cliente) {
-        jdbcTemplate.update("insert into cliente (nome, email, telefone, profissao) values (?, ?, ?, ?)",
-                cliente.getNome(), cliente.getEmail(), cliente.getTelefone(), cliente.getProfissao());
+    public ResponseEntity<MessageResponse> save(@RequestBody Cliente cliente) throws NotCreateId, MissingProperty {
+        clienteService.save(cliente);
+        return ResponseEntity.ok(new MessageResponse("Cliente salvo com sucesso"));
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Integer id) {
-        jdbcTemplate.update("delete from cliente where id = ?", id);
+    public ResponseEntity<MessageResponse> delete(@PathVariable Integer id) throws NotFound {
+        clienteService.delete(id);
+        return ResponseEntity.ok(new MessageResponse("Cliente deletado com sucesso"));
     }
 }
