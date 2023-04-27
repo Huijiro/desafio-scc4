@@ -1,29 +1,63 @@
-# INSTRUÇÕES 
-CRUD pure JS
+# Pure JS
 
-Criar um sistema que adicione uma pessoa em uma tabela e que seja possível remove-la também.
+## Instalação e execução
 
-FRONTEND
-Você pode utilizar somente HTML CSS e Javascript puro, não podem ser usuados frameworks.
+1. Faça um clone desse repositório;
 
-Para isso você precisa apenas de campos de texto (inputs) um botão e uma tabela.
+   ```bash
+   git clone https://github.com/scc4/pure-js && cd pure-js && git checkout gabriel-rodrigues
+   ```
 
-Essa tabela deverá conter todos os dados de uma pessoa: nome, e-mail, telefone, profissão. 
-Ao final de cada linha da tabela adicione um botão “remover”, ao clicar nele a linha deverá ser removida da tabela.
-Essa ação deverá ser comandada pelo seu código em Javascript e cordenada com o backend.
+2. Entre na pasta;
 
-Veja abaixo uma foto do que se espera:
+   ```bash
+   cd pure-js
+   ```
 
-![javascript-puro](https://user-images.githubusercontent.com/11966183/163838488-186296b6-10f9-4e68-83b6-b5bb248d207e.jpg)
+3. Suba o container;
 
-BACKEND
+   Requerimentos:
 
-Você deve utilizar JAVA crirar o RESTfull endpoint de insert (POST) e de remoção (DELETE).
+   - Docker
+   - Docker Compose
 
-Utilizar Spring ou Quarkus, mas não utlizar JPA ou Hibernate.
+   ```bash
+   docker-compose up -d
+   ```
 
-Deve salvar em um banco de dados SQL
+4. (Alternativa) Rode o frontend e o backend localmente;
 
-SUGESTÕES:
+   Requerimentos:
 
-Usar o Gson ou Jackson para serializar objetos JSON
+   - NodeJS
+   - NPM
+   - Java LTS
+   - Maven
+
+   ```bash
+   cd frontend && npm install && npm run dev
+
+   cd backend && mvn package && java -jar target/pure-js-0.0.1-SNAPSHOT.jar
+   ```
+
+5. Accesse `http://localhost:5173` para ver o resultado do frontend.
+
+6. Accesse `http://localhost:8080` para ver o resultado do backend.
+
+## Tecnologias
+
+Backend:
+
+- [Java](https://www.java.com/pt-BR/)
+
+- [Maven](https://maven.apache.org/)
+
+- [Spring Boot](https://spring.io/projects/spring-boot)
+
+Frontend:
+
+- [NodeJS](https://nodejs.org/en/)
+
+- [NPM](https://www.npmjs.com/)
+
+- [Vite](https://vitejs.dev/)
